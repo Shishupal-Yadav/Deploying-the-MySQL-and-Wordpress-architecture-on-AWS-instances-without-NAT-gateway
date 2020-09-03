@@ -35,13 +35,13 @@ Also attach the key with the same.
 **Step 1**
 
 Initially , I have created a user in my AWS account with limited power . This user doesn't have a root access  so it  won't be able to able to create other user and see the billing dashboard 
-![Job1](/Images/USER.jpg/)
+![Job1](/images/USER.jpg/)
 
 **Step 2**
 
 Now I login to my AWS account with the User  to perform task
 
-![Job1](/Images/1.jpg/)
+![Job1](/images/1.jpg/)
 
 **Step 3**
 
@@ -52,7 +52,7 @@ Now after logging in run ```terraform init``` to  initialize the local directory
 **Step 4**
 And  now we run  ```terraform apply --auto-approve``` to create the required infrastructure in just one command
 
-![Job1](/Images/apply.jpg/)
+![Job1](/images/2.jpg/)
 
 **Step 5**
 So here our infrastructure is created let's look at its components and code used for it 
@@ -75,7 +75,7 @@ So here our infrastructure is created let's look at its components and code used
   }
 }
 ```
-![Job1](/Images/VPC.jpg/)
+![Job1](/images/VPC.jpg/)
 
 - Then after VPC I have created Internet Gateway so that the public instance can connect to outside world
 ```resource "aws_internet_gateway" "igw" {
@@ -87,7 +87,7 @@ So here our infrastructure is created let's look at its components and code used
   }
 }
 ```
-![Job1](/Images/igw.jpg/)
+![Job1](/images/IGW.jpg/)
 
 - Now here is our Private and Public Subnets
 ```resource "aws_subnet" "public" {
@@ -112,10 +112,10 @@ resource "aws_subnet" "private" {
 ```
 
 - Private Subnet
-![Private](/Images/private.jpg/)
+![Private](/images/private.jpg/)
 
 - Public Subnet
-![Public](/Images/public.jpg/)
+![Public](/images/Public.jpg/)
 
 - Route table
   A route table contains a set of rules, called routes, that are used to determine where network traffic from your subnet or gateway is directed and I have attached it to public subnet
@@ -139,48 +139,7 @@ resource "aws_route_table_association" "public_subnet_asso" {
   depends_on = [aws_route_table.public_route , aws_subnet.public]
 }
 ```  
-- Now here I have created the Nat Gateway
-  NAT Gateway, also known as Network Address Translation Gateway, is used to enable instances present in a private subnet to help connect to the internet or AWS services. In addition to this, the gateway makes sure that the internet doesn't initiate a connection with the instances.
-  
-  ![Nat](/Images/Nat.jpg/)
-  
-```resource "aws_eip" "lb" {
-   vpc      = true
-   depends_on = [aws_internet_gateway.igw]
-}
 
-
-resource "aws_nat_gateway" "gw" {
-  allocation_id = "${aws_eip.lb.id}"
-  
-  subnet_id     = "${aws_subnet.public.id}"
-  depends_on = [aws_internet_gateway.igw]
-
-  tags = {
-    Name = "gw NAT"
-  }
-}
-
-resource "aws_route_table" "nat_route" {
-  vpc_id = "${aws_vpc.main.id}"
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.igw.id}"
-  }
-
-
-  tags = {
-    Name = "nat_routetable"
-  }
-}
-
-resource "aws_route_table_association" "nat_route_asso" {
-  
-  subnet_id      = "${aws_subnet.private.id}"
-  route_table_id = "${aws_route_table.nat_route.id}"
- 
-}
-```
 
 - Now I have created the security groups for the instances
   - For Wordpress instance
@@ -273,7 +232,7 @@ resource "aws_security_group" "sg_private" {
 ```
 
 
-  ![SG](/Images/SG.jpg/)
+  ![SG](/images/SG.jpg/)
   
   - Here is our instances of Wordpress and MySQL
     - Wordpress Instance
@@ -308,13 +267,13 @@ resource "aws_security_group" "sg_private" {
 }
 
 ```
- ![Nat](/Images/Instance.jpg/)
+ ![Nat](/images/Instance.jpg/)
 
 
 
 **Now when we connect to the public ip of wordpress instance it opens the Wordpress**
 
- ![Nat](/Images/Word.jpg/)
+ ![Nat](/images/3.jpg/)
  
  
  # Thank You :-)
