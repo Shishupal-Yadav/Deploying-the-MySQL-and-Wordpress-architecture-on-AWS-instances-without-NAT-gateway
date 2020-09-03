@@ -47,7 +47,6 @@ Now I login to my AWS account with the User  to perform task
 
 Now after logging in run ```terraform init``` to  initialize the local directory  and it also checks the .tf file and download the required plugins
 
-![Job1](/Images/init.jpg/)
 
 **Step 4**
 And  now we run  ```terraform apply --auto-approve``` to create the required infrastructure in just one command
@@ -269,7 +268,8 @@ resource "aws_security_group" "sg_private" {
 ```
  ![Nat](/images/Instance.jpg/)
 
-
+**Here is our Instance in Public Subnet able to ping outside World**
+ ![Nat](/images/Bitnami.jpg/)
 
 **Now when we connect to the public ip of wordpress instance it opens the Wordpress**
 
