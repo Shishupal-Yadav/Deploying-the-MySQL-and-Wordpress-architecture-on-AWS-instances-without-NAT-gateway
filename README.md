@@ -1,4 +1,4 @@
-# Deploying-the-MySQL-and-Wordpress-architecture-on-AWS-instances-without-NAT-gateway
+# MySQL-and-Wordpress-architecture-on-AWS-instances-without-NAT-gateway
 ![alt text](https://2.bp.blogspot.com/-M5mou_8yyl4/XDLK-2xxWtI/AAAAAAAACeI/f4o3_L2PzP0Q8lVqzpAJ4W25GMdQzUOSwCLcBGAs/s1600/sample%2Bvpc.jpg)
 
 **Project Description**
